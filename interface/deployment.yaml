@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ai1-deployment
-  namespace: cjarcau
+  namespace: 
   labels:
     app: ai1
 spec:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: ai1
-        image: scr4pp/ai1:arm80
+        image: scr4pp/ai1:amd
         ports:
         - name: api
           containerPort: 3000
