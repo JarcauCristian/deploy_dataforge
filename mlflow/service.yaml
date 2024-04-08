@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mlflow-server-service
+  namespace: cjarcau
+spec:
+  selector:
+    app: mlflow
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: mflow-port
+      nodePort: 31100
+  type: LoadBalancer

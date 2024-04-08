@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pod-deleter-role
+  namespace: cjarcau
+rules:
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["delete"]
+- apiGroups: [""]
+  resources: ["services", "secrets"]
+  verbs: ["delete"]
+- apiGroups: ["networking.k8s.io"]
+  resources: ["ingresses"]
+  verbs: ["delete"]

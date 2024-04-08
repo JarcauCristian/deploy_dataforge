@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: neo4j-api-ingress
+  namespace: cjarcau
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "86400"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "86400"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /neo4j
+            pathType: Prefix
+            backend:
+              service:
+                name: neo4j-api-service
+                port:
+                  number: 49150
+  ingressClassName: nginx

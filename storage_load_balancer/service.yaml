@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-api-service
+  namespace: cjarcau
+spec:
+  selector:
+    app: go-api
+  ports:
+    - name: go-api
+      protocol: TCP
+      port: 49151
+      targetPort: go-api
+  type: ClusterIP

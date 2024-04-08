@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: cronjob-manager-rolebinding
+  namespace: cjarcau
+subjects:
+- kind: ServiceAccount
+  name: cronjob-manager-service-account
+  namespace: cjarcau
+roleRef:
+  kind: Role
+  name: cronjob-manager-role
+  apiGroup: rbac.authorization.k8s.io

@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: older-deleter
+  namespace: cjarcau
+spec:
+  schedule: "0 */5 * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: cronjob-manager-service-account
+          containers:
+          - name: older-deleter-cronjob
+            image: scr4pp/kubernetes-cronjob:arm7
+            env:
+              - name: NAMESPACE
+                value: cjarcau
+              - name: OLDER_THEN
+                value: "20"
+              - name: POSTGRES_USER
+                value: postgres
+              - name: POSTGRES_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: cronjob-secret
+                    key: password
+              - name: POSTGRES_HOST
+                value: 192.168.1.2
+              - name: POSTGRES_PORT
+                value: "32102"
+              - name: POSTGRES_DB
+                value: postgres
+            command: ["python3", "main.py"]
+            imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deleter-deployment
+  namespace: cjarcau
+  labels:
+    app: api-deleter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-deleter
+  template:
+    metadata:
+      labels:
+        app: api-deleter
+    spec:
+      serviceAccountName: pod-deleter-service-account
+      containers:
+      - name: api-deleter
+        image: scr4pp/pod-deleter:arm2
+        env:
+        - name: NAMESPACE
+          value: cjarcau
+        ports:
+        - containerPort: 8000
+        imagePullPolicy: IfNotPresent

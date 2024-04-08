@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: keycloak
+  name: keycloak-deployment
+  namespace: cjarcau
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+      - env:
+        - name: KEYCLOAK_USER
+          valueFrom:
+            secretKeyRef:
+              name: keycloak-secret
+              value: user
+        - name: KEYCLOAK_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: keycloak-secret
+              value: password
+        - name: KC_HTTPS_CERTIFICATE_FILE
+          value: /opt/keycloak/conf/server.crt.pem \
+        - name: KC_HTTPS_CERTIFICATE_KEY_FILE
+          value: /opt/keycloak/conf/server.key.pem \
+        - name: DB_VENDOR
+          value: postgres
+        - name: DB_ADDR
+          value: 
+        - name: DB_PORT
+          value:
+        - name: DB_DATABASE
+          value: postgres
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: keycloak-secret
+              value: db_user
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: db_password
+              name: keycloak-secret
+        image: jboss/keycloak:latest
+        imagePullPolicy: IfNotPresent
+        name: keycloak
+        ports:
+        - containerPort: 8080
+          name: keycloak-port
+        - containerPort: 8442
+          name: keycloak-http-port

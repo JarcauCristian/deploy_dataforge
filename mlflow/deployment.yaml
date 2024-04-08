@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlflow-server-deployment
+  namespace: cjarcau
+  labels:
+    app: mlflow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlflow
+  template:
+    metadata:
+      labels:
+        app: mlflow
+    spec:
+      containers:
+      - name: mlflow
+        image: scr4pp/mlflow_server
+        env:
+        - name: MLFLOW_S3_ENDPOINT_URL
+          value: https://minio1.sedimark.work
+        - name: MLFLOW_TRACKING_INSECURE_TLS
+          value: "true"
+        - name: AWS_ACCESS_KEY_ID
+          value: super
+        - name: AWS_SECRET_ACCESS_KEY
+          value: doopersecret
+        ports:
+        - name: mflow-port
+          containerPort: 5000
+        imagePullPolicy: IfNotPresent
