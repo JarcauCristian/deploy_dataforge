@@ -7,7 +7,6 @@ from kubernetes.client.rest import ApiException
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-a", "--addr", type=str, help="Address for postgres db!", required=True)
-parser.add_argument("-p", "--port", type=str, help="Port for postgres db!", required=True)
 parser.add_argument("-n", "--namespace", type=str, help="Namespace to run the deployment on!", required=True)
 
 args = parser.parse_args()
@@ -21,13 +20,12 @@ def main():
     apps_v1_api = client.AppsV1Api()
     core_v1_api = client.CoreV1Api()
 
-    if os.path.exists("./deployment.yaml"):
-        with open("./deployment.yaml", "r") as f:
-            deployment = yaml.safe_load(f)
-
-        deployment["spec"]["template"]["spec"]["containers"][0]["env"][5]["value"] = args.addr
-        deployment["spec"]["template"]["spec"]["containers"][0]["env"][6]["value"] = args.port
-        deployment["metadata"]["namespace"] = args.namespace
+    if os.path.exists("./cronjob.yaml"):
+        with open("./cronjob.yaml", "r") as f:
+            cronjob = yaml.safe_load(f)
+        cronjob["metadata"]["namespace"] = args.namespace
+        cronjob["spec"]["jobTemplate"]["spec"]["template"]["spec"]["env"][3]["value"] = args.addr
+        cronjob["spec"]["jobTemplate"]["spec"]["template"]["spec"]["env"][6]["value"] = f"https://{args.addr}:30442/auth/realms/react-keycloak/protocol/openid-connect/token"
     else:
         exit(1)
 

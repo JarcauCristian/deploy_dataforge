@@ -5,12 +5,28 @@ if [ $# -ne 2 ]; then
     exit 1
 fi
 
-if [ $]
+address=$(hostname -I | awk '{print $1}')
 
-python run_keycloak.py
+if [ -z ${KUBE_CONFIG_DEFAULT_LOCATION+x} ]; then
+    echo "Please specify the KUBE_CONFIG_DEFAULT_LOCATION environment variable that points to the k3s cluster configuration!"
+    exit 1
+fi
+
+
+python run_keycloak.py -a $address -p "32102" -n $1
 
 if [ $? -ne 0 ]; then
     echo "Could not create the deployment for keycloak."
 fi
 
 sleep 30
+
+if [ "$2" = "" ]; then
+    python create.py
+else
+    python create.py -a $host
+fi
+
+if [ $? -ne 0 ]; then
+    echo "Could not create the realms and clients inside keycloak."
+fi

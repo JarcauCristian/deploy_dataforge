@@ -3,7 +3,7 @@ import requests
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-h", "--host", type=str, help="Hostname for UI.", required=True)
+parser.add_argument("-a", "--address", type=str, help="Hostname for UI.")
 
 args = parser.parse_args()
 
@@ -48,7 +48,7 @@ def main():
         "clientId": "reactClient",
         "enabled": True,
         "redirectUris": [
-            "https://localhost:31491" if args.host is None else args.host
+            "https://localhost:31491" if args.address is None else args.host
         ],
         "publicClient": False,
     }
