@@ -51,6 +51,7 @@ def main():
             pv_volume = yaml.safe_load(f)
 
         pv_volume["metadata"]["namespace"] = args.namespace
+        pv_volume["spec"]["hostPath"]["path"] = f"/home/{args.username}/postgres_data"
     else:
         exit(1)
 

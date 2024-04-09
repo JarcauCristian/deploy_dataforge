@@ -1,0 +1,77 @@
+{
+    "namespace": "default",
+    "os_type": "amd",
+    "dataset_cronjob": {
+        "deploy_type": "single"
+    },
+    "interface": {
+        "deploy_type": "single"
+    },
+    "keycloak": {
+        "deploy_type": "single",
+        "values": {
+            "ui_hostname": ""
+        }
+    },
+    "mage": {
+        "deploy_type": "with"
+    },
+    "mage_api": {
+        "deploy_type": "with"
+    },
+    "minio": {
+        "values": {
+            "username": "admin",
+            "password": "password"
+        },
+        "deploy_type": "single"
+    },
+    "mlflow": {
+        "values": {
+            "minio_endpoint": "https://minio1.sedimark.work",
+            "minio_access_key": "super",
+            "minio_secret_key": "doopepassword"
+        },
+        "deploy_type": "with"
+    },
+    "mlflow_api": {
+        "deploy_type": "with"
+    },
+    "neo4j_api": {
+        "values": {
+            "username": "admin",
+            "password": "password"
+        },
+        "deploy_type": "single"
+    },
+    "nginx": {
+        "deploy_type": "single"
+    },
+    "notebook_cronjob": {
+        "deploy_type": "single"
+    },
+    "notebook_deletition": {
+        "deploy_type": "single"
+    },
+    "notebook_manager": {
+        "deploy_type": "single"
+    },
+    "postgres": {
+        "deploy_type": "single"
+    },
+    "redis": {
+        "deploy_type": "single"
+    },
+    "role_bindings": {
+        "deploy_type": "single"
+    },
+    "roles": {
+        "deploy_type": "single"
+    },
+    "services": {
+        "deploy_type": "single"
+    },
+    "storage_load_balancer": {
+        "deploy_type": "single"
+    }
+}

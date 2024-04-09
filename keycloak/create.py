@@ -94,7 +94,7 @@ def main():
         "enabled": True,
         "firstName": "New",
         "lastName": "User",
-        "email": "newuser@example.com",
+        "email": "stefan.jarcau@student.unitbv.ro",
         "credentials": [
             {
                 "type": "password",

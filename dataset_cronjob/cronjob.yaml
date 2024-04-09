@@ -1,0 +1,52 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: dataset-deleter
+  namespace: cjarcau
+spec:
+  schedule: "0 0 * * 6"
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: cronjob-manager-service-account
+          containers:
+          - name: dataset-deleter-cronjob
+            image: scr4pp/dataset-cronjob
+            env:
+              - name: OLDER
+                value: "20"
+              - name: POSTGRES_USER
+                value: postgres
+              - name: POSTGRES_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-secret-config
+                    key: password
+              - name: POSTGRES_HOST
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-secret-config
+                    key: password 
+              - name: POSTGRES_PORT
+                value: "49140"
+              - name: POSTGRES_DB
+                value: postgres
+              - name: KEYCLOAK_URL
+                value:
+              - name: CLIENT_ID
+                value: reactClient
+              - name: USER
+                value: stefan.jarcau@student.unitbv.ro
+              - name: NAMESPACE
+                value: 
+              - name: PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: dataset-secret
+                    key: password
+            command: ["python3", "main.py"]
+            imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure
