@@ -27,7 +27,10 @@ spec:
               name: postgres-secret-config
               key: password
         - name: POSTGRES_HOST
-          value: 
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret-config
+              key: host
         - name: POSTGRES_PORT
           value: "49140"
         - name: POSTGRES_DB

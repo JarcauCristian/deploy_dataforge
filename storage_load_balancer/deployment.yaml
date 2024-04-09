@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: go-api
-        image: scr4pp/go_load_balancer:arm10
+        image: scr4pp/go_load_balancer
         ports:
         - name: go-api
           containerPort: 9000

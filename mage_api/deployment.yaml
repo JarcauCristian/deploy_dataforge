@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mage-api-deployment
-  namespace: cjarcau
+  namespace:
   labels:
     app: mage-api
 spec:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: mage-api
-        image: scr4pp/mage-api:arm17
+        image: scr4pp/mage-api
         ports:
         - name: api
           containerPort: 8000
@@ -35,5 +35,5 @@ spec:
               name: mage-secret
               key: password
         - name: BASE_URL
-          value: https://mage-ai.sedimark.work
+          value: 
         imagePullPolicy: IfNotPresent

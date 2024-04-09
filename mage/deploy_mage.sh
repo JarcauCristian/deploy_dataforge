@@ -1,7 +1,7 @@
 #! /bin/bash
 
 if [ $# -ne 3 ]; then
-    echo "Usage: $0 <username> <password> <namespace>"
+    echo "Usage: $0 <namespace>"
     exit 1
 fi
 
@@ -12,16 +12,9 @@ if [[ $check_k3s != "active" ]]; then
     exit 1
 fi
 
-helm dependency update
+helm repo add mageai https://mage-ai.github.io/helm-charts
 
-if [ $? -ne 0 ]; then
-    echo "Could not update minio dependencies!"
-    exit 1
-fi
-
-python3 update_values.py -u $1 -p $2
-
-helm install minio-realease minio --values ./values.yaml -n $3
+helm install mageai mageai/mageai --values ./values.yaml -n "$1"
 
 if [ $? -ne 0 ]; then
     echo "Could not create the deployment!"

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [ $# -ne 2 ]; then
+if [ $# -ne 4 ]; then
     echo "Usage: $0 <namespace> <minio_endpoint> <minio_access_key> <minio_secret_key>"
     echo "<minio_endpoint>: http(s)://example.com or http(s)://ip_address:port"
     exit 1
