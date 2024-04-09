@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: notebook-manager-api-deployment
-  namespace: cjarcau
+  namespace:
   labels:
     app: notebook-manager-api
 spec:
@@ -31,13 +31,13 @@ spec:
               name: postgres-secret-config
               key: password
         - name: POSTGRES_HOST
-          value: 192.168.1.2
+          value: 
         - name: POSTGRES_PORT
-          value: "32102"
+          value: "49140"
         - name: POSTGRES_DB
           value: postgres
         - name: NAMESPACE
-          value: cjarcau
+          value: 
         - name: KEYCLOAK_URL
-          value: https://keycloak.sedimark.work/auth/realms/react-keycloak/protocol/openid-connect/userinfo
+          value:
         imagePullPolicy: IfNotPresent

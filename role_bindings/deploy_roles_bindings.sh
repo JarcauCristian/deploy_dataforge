@@ -10,7 +10,7 @@ if [ -z ${KUBE_CONFIG_DEFAULT_LOCATION+x} ]; then
     exit 1
 fi
 
-python3 run_role_bindings.py
+python3 run_role_bindings.py -n "$1"
 
 if [ $? -ne 0 ]; then
     echo "Could not create $? service accounts"

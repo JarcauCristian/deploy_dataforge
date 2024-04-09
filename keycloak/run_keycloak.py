@@ -7,16 +7,11 @@ from kubernetes.client.rest import ApiException
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-a", "--addr", type=str, help="Address for postgres db!", required=True)
-parser.add_argument("-p", "--port", type=str, help="Port for postgres db!", required=True)
 parser.add_argument("-n", "--namespace", type=str, help="Namespace to run the deployment on!", required=True)
 
 args = parser.parse_args()
 
 def main():
-
-    if not os.path.exists("/etc/rancher/k3s/k3s.yaml"):
-        exit(1)
-
     config.load_config()
     apps_v1_api = client.AppsV1Api()
     core_v1_api = client.CoreV1Api()
@@ -26,7 +21,6 @@ def main():
             deployment = yaml.safe_load(f)
 
         deployment["spec"]["template"]["spec"]["containers"][0]["env"][5]["value"] = args.addr
-        deployment["spec"]["template"]["spec"]["containers"][0]["env"][6]["value"] = args.port
         deployment["metadata"]["namespace"] = args.namespace
     else:
         exit(1)

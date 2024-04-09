@@ -1,12 +1,13 @@
 #! /bin/bash
 
-if [ $# -ne 2 ]; then
+if [ $# -ne 1 ]; then
     echo "Usage: $0 <namespace> <os_type>"
     exit 1
 fi
 
 namespace="$1"
 os_type="$2"
+address=$(hostname -I | awk '{print $1}')
 
 if [[ $os_type != "amd" ]] && [[ $os_type != "arm" ]]; then
     echo "Invalid os_type: $os_type. Possible values (arm, amd)"
@@ -18,10 +19,10 @@ if [ -z ${KUBE_CONFIG_DEFAULT_LOCATION+x} ]; then
     exit 1
 fi
 
-
-python3 run_ui.py -n $namespace -o $os_type
+python3 run_notebook_manager.py -n $namespace -a $address -o $os_type
 
 if [ $? -ne 0 ]; then
-    echo "User interface failed creating!"
+    echo "Notebook manager failed creating!"
     exit 1
 fi
+

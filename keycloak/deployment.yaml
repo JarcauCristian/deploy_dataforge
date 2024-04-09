@@ -26,7 +26,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: keycloak-secret
-              value: password
+              key: password
         - name: KC_HTTPS_CERTIFICATE_FILE
           value: /opt/keycloak/conf/server.crt.pem \
         - name: KC_HTTPS_CERTIFICATE_KEY_FILE
@@ -36,19 +36,19 @@ spec:
         - name: DB_ADDR
           value: 
         - name: DB_PORT
-          value:
+          value: "49140"
         - name: DB_DATABASE
           value: postgres
         - name: DB_USER
           valueFrom:
             secretKeyRef:
               name: keycloak-secret
-              value: db_user
+              key: db_user
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
+              name: postgres-secret-config
               key: db_password
-              name: keycloak-secret
         image: jboss/keycloak:latest
         imagePullPolicy: IfNotPresent
         name: keycloak

@@ -13,7 +13,7 @@ if [ -z ${KUBE_CONFIG_DEFAULT_LOCATION+x} ]; then
 fi
 
 
-python run_keycloak.py -a $address -p "32102" -n $1
+python run_keycloak.py -a $address -n $1
 
 if [ $? -ne 0 ]; then
     echo "Could not create the deployment for keycloak."

@@ -6,8 +6,8 @@ from kubernetes.client.rest import ApiException
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-n", "--namespace", type=str, help="Namespace to run the files on!", required=True)
-parser.add_argument("-o", "--os", type=str, help="Os type for image tag!", required=True)
+parser.add_argument("-o", "--os", type=str, help="Os for image tag!", required=True)
+parser.add_argument("-n", "--namespace", type=str, help="Namespace to run the deployment on!", required=True)
 
 args = parser.parse_args()
 
@@ -20,8 +20,9 @@ def main():
         with open("./deployment.yaml", "r") as f:
             deployment = yaml.safe_load(f)
 
-        deployment["metadata"]["namespace"] = args.namespace
+        deployment["spec"]["template"]["spec"]["containers"][0]["env"][0]["value"] = args.namespace
         deployment["spec"]["template"]["spec"]["containers"][0]["image"] = deployment["spec"]["template"]["spec"]["containers"][0]["image"] + ":" + args.os
+        deployment["metadata"]["namespace"] = args.namespace
     else:
         exit(1)
 
@@ -32,6 +33,7 @@ def main():
         service["metadata"]["namespace"] = args.namespace
     else:
         exit(1)
+    
 
     try:
         apps_v1_api.create_namespaced_deployment(namespace=args.namespace, body=deployment)

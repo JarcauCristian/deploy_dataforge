@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [ $# -ne 2 ]; then
+if [ $# -ne 1 ]; then
     echo "Usage: $0 <namespace> <os_type>"
     exit 1
 fi
@@ -18,10 +18,10 @@ if [ -z ${KUBE_CONFIG_DEFAULT_LOCATION+x} ]; then
     exit 1
 fi
 
-
-python3 run_ui.py -n $namespace -o $os_type
+python3 run_notebook_deletition.py -n $namespace -o $os_type
 
 if [ $? -ne 0 ]; then
-    echo "User interface failed creating!"
+    echo "Notebook deletion failed creating!"
     exit 1
 fi
+

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: api-deleter-deployment
-  namespace: cjarcau
+  namespace:
   labels:
     app: api-deleter
 spec:
@@ -18,10 +18,10 @@ spec:
       serviceAccountName: pod-deleter-service-account
       containers:
       - name: api-deleter
-        image: scr4pp/pod-deleter:arm2
+        image: scr4pp/pod-deleter
         env:
         - name: NAMESPACE
-          value: cjarcau
+          value: 
         ports:
         - containerPort: 8000
         imagePullPolicy: IfNotPresent
