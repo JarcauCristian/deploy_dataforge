@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: models
-        image: scr4pp/models-api:arm28
+        image: scr4pp/models-api
         ports:
         - containerPort: 8000
         env:
@@ -27,9 +27,9 @@ spec:
               name: postgres-secret-config
               key: password
         - name: POSTGRES_HOST
-          value: 192.168.1.2
+          value: 
         - name: POSTGRES_PORT
-          value: "32102"
+          value: "49140"
         - name: POSTGRES_DB
           value: postgres
         - name: MLFLOW_TRACKING_USERNAME
@@ -40,16 +40,25 @@ spec:
               name: models-secret
               key: mlflow_password
         - name: AWS_ACCESS_KEY_ID
-          value: super
+          valueFrom:
+            secretKeyRef:
+              name: mlflow-secret
+              key: aws_access_key_id
         - name: AWS_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
-              name: models-secret
-              key: secret_key
+              name: mlflow-secret
+              key: aws_secret_access_key
         - name: MLFLOW_S3_ENDPOINT_URL
-          value: http://62.72.21.79:9000
+          valueFrom:
+            secretKeyRef:
+              name: mlflow-secret
+              key: mlflow_s3_endpoint_url
         - name: MLFLOW_TRACKING_URI
-          value: http://192.168.1.2:31100
+          valueFrom:
+            secretKeyRef:
+              name: mlflow-secret
+              key: mlflow_tracking_uri
         - name: KEYCLOAK_URL
-          value: https://keycloak.sedimark.work/auth/realms/react-keycloak/protocol/openid-connect/userinfo
+          value: 
         imagePullPolicy: IfNotPresent

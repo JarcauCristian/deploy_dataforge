@@ -6,9 +6,11 @@ from kubernetes.client.rest import ApiException
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-a", "--addr", type=str, help="Address for postgres db!", required=True)
-parser.add_argument("-o", "--os", type=str, help="Os for image tag!", required=True)
+parser.add_argument("-a", "--addr", type=str, help="Address for deploymnets db!", required=True)
 parser.add_argument("-n", "--namespace", type=str, help="Namespace to run the deployment on!", required=True)
+parser.add_argument("-o", "--os", type=str, help="Os for image tag!", required=True)
+parser.add_argument("-p", "--password", type=str, help="Password for neo4j database!", required=True)
+parser.add_argument("-u", "--username", type=str, help="Username for neo4j database!", required=True)
 
 args = parser.parse_args()
 
@@ -22,10 +24,10 @@ def main():
         with open("./deployment.yaml", "r") as f:
             deployment = yaml.safe_load(f)
 
-        deployment["spec"]["template"]["spec"]["containers"][0]["env"][2]["value"] = args.addr
-        deployment["spec"]["template"]["spec"]["containers"][0]["env"][5]["value"] = args.namespace
-        deployment["spec"]["template"]["spec"]["containers"][0]["env"][6]["value"] = f"https://{args.addr}:30442/auth/realms/react-keycloak/protocol/openid-connect/userinfo"
-        deployment["spec"]["template"]["spec"]["containers"][0]["env"][7]["value"] = args.os
+        deployment["spec"]["template"]["spec"]["containers"][0]["env"][0]["value"] = args.username
+        deployment["spec"]["template"]["spec"]["containers"][0]["env"][1]["value"] = args.password
+        deployment["spec"]["template"]["spec"]["containers"][0]["env"][2]["value"] = f"bolt://{args.addr}:7687"
+        deployment["spec"]["template"]["spec"]["containers"][0]["env"][4]["value"] = f"https://{args.addr}:30442/auth/realms/react-keycloak/protocol/openid-connect/userinfo"
         deployment["spec"]["template"]["spec"]["containers"][0]["image"] = deployment["spec"]["template"]["spec"]["containers"][0]["image"] + ":" + args.os
         deployment["metadata"]["namespace"] = args.namespace
     else:

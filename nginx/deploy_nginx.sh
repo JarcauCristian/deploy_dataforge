@@ -8,5 +8,6 @@ fi
 helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace $1 --values ./values.yaml
 
 if [ $? -ne 0 ]; then
+    echo "Failed to deploy nginx ingress controller!"
     exit 1
 fi

@@ -20,15 +20,15 @@ spec:
         image: scr4pp/neo4j-api:arm23
         env:
         - name: USERNAME
-          value: "neo4j"
+          value: 
         - name: PASS
-          value: "super_dooper_secret"
+          value: 
         - name: URI
-          value: "bolt://192.168.1.2:7687"
+          value:
         - name: INSIDE_DOCKER
           value: "true"
         - name: KEYCLOAK_URL
-          value: https://keycloak.sedimark.work/auth/realms/react-keycloak/protocol/openid-connect/userinfo
+          value: 
         - name: PASSWORD
           value: 7dfe20e1136346b9dc5254f8e1941f97224a8bb50bb4b28d6acc3932a98600ec
         ports:

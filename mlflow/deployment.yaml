@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mlflow-server-deployment
-  namespace: cjarcau
+  namespace:
   labels:
     app: mlflow
 spec:
@@ -20,13 +20,13 @@ spec:
         image: scr4pp/mlflow_server
         env:
         - name: MLFLOW_S3_ENDPOINT_URL
-          value: https://minio1.sedimark.work
+          value: 
         - name: MLFLOW_TRACKING_INSECURE_TLS
           value: "true"
         - name: AWS_ACCESS_KEY_ID
-          value: super
+          value: 
         - name: AWS_SECRET_ACCESS_KEY
-          value: doopersecret
+          value: 
         ports:
         - name: mflow-port
           containerPort: 5000

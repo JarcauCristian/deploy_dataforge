@@ -19,10 +19,10 @@ if [ -z ${KUBE_CONFIG_DEFAULT_LOCATION+x} ]; then
     exit 1
 fi
 
-python3 run_notebook_manager.py -n $namespace -a $address -o $os_type
+python3 run_notebook_cronjob.py -n $namespace -a $address -o $os_type
 
 if [ $? -ne 0 ]; then
-    echo "Notebook manager failed creating!"
+    echo "Notebook cronjob failed creating!"
     exit 1
 fi
 

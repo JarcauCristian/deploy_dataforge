@@ -89,6 +89,28 @@ def main():
     if response.status_code not in [201, 204]:
         exit(1)
 
+    user_data = {
+        "username": "tokenUser",
+        "enabled": True,
+        "firstName": "New",
+        "lastName": "User",
+        "email": "newuser@example.com",
+        "credentials": [
+            {
+                "type": "password",
+                "value": "token",
+                "temporary": False  # Set to True if you want the user to update the password at first login
+            }
+        ],
+        "attributes": {
+            "customAttribute": "customValue"  # Example of adding a custom attribute
+        }
+    }
+
+    response = requests.post(url, json=user_data, headers=headers)
+
+    if response.status_code != 201:
+        exit(1)
 
 if __name__ == '__main__':
     main()
