@@ -12,6 +12,7 @@ def deploy(path: str, **kwargs):
         quoted_args.append(shlex.quote(str(value)))
 
     command = [str(path), *quoted_args]
+    print(f"Running commnad: {command}")
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return result.returncode, result.stdout, result.stderr
 
@@ -23,6 +24,7 @@ def undeploy(path: str, **kwargs):
         quoted_args.append(shlex.quote(str(value)))
 
     command = [str(path), *quoted_args]
+    print(f"Running commnad: {command}")
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return result.returncode, result.stdout, result.stderr
 
@@ -42,6 +44,7 @@ def load_config(path: str):
 def main():
     config = load_config("./config.json")
 
+    print("Making executable files executable.")
     for path in Path.cwd().rglob("*.sh"):
         make_executable(path)
 
