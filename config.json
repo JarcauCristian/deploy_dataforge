@@ -26,17 +26,17 @@
         "deploy_type": "single"
     },
     "mage": {
-        "deploy_type": "mage_1",
-        "wait_time": 30
+        "deploy_type": "single",
+        "wait_time": 22
     },
     "mlflow": {
         "values": {
             "minio_endpoint": "https://minio1.sedimark.work",
             "minio_access_key": "super",
-            "minio_secret_key": "doopepassword"
+            "minio_secret_key": "doopersecret"
         },
         "deploy_type": "single",
-        "wait_time": 30
+        "wait_time": 22
     },
     "mage_api": {
         "values": {

@@ -18,7 +18,7 @@ if [ -z ${KUBE_CONFIG_DEFAULT_LOCATION+x} ]; then
     exit 1
 fi
 
-python3 $PWD/notebook_deletition/un_notebook_deletition.py -n $namespace -o $os_type
+python3 $PWD/notebook_deletition/run_notebook_deletition.py -n $namespace -o $os_type
 
 if [ $? -ne 0 ]; then
     echo "Notebook deletion failed creating!"
