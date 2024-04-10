@@ -11,7 +11,7 @@ def deploy(path: str, **kwargs):
     for value in kwargs.values():
         quoted_args.append(shlex.quote(str(value)))
 
-    command = f"{path} " + " ".join(quoted_args)
+    command = [str(path), *quoted_args]
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return result.returncode, result.stdout, result.stderr
 
@@ -22,8 +22,8 @@ def undeploy(path: str, **kwargs):
     for value in kwargs.values():
         quoted_args.append(shlex.quote(str(value)))
 
-    command = f"{path} " + " ".join(quoted_args)
-    result = subprocess.run(shlex.split(command), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    command = [str(path), *quoted_args]
+    result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return result.returncode, result.stdout, result.stderr
 
 
