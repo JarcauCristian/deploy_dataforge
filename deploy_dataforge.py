@@ -13,7 +13,7 @@ def deploy(path: str, **kwargs):
 
     command = [str(path), *quoted_args]
     print(f"Running commnad: {command}")
-    result = subprocess.run(command,  cwd="/".join(str(path).split("/")[:-1]), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    result = subprocess.run(command,  cwd="/".join(str(path).split("/")[:-2]), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return result.returncode, result.stdout, result.stderr
 
 
@@ -25,12 +25,12 @@ def undeploy(path: str, **kwargs):
 
     command = [str(path), *quoted_args]
     print(f"Running commnad: {command}")
-    result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    result = subprocess.run(command, cwd="/".join(str(path).split("/")[:-2]), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return result.returncode, result.stdout, result.stderr
 
 
 def make_executable(path: str):
-    result = subprocess.run(["chmod", "+x", str(path)], cwd="/".join(str(path).split("/")[:-1]), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    result = subprocess.run(["chmod", "+x", str(path)], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return result.returncode, result.stdout, result.stderr
 
 
@@ -51,7 +51,7 @@ def main():
     failed_deployments = []
     for path in Path.cwd().rglob("deploy_*.sh"):
         deployment = str(path).split("/")[-2]
-        print(f"Deploying {deployment}")
+        print(f"\nDeploying {deployment}")
         if config[deployment].get("wait_time") is None:
             result = deploy(path, **{"namespace": config["namespace"]} | config[deployment]["values"]) if config[deployment].get("values") is not None else deploy(path, **{"namespace": config["namespace"]})
         else:

@@ -83,21 +83,12 @@
         "deploy_type": "single"
     },
     "role_bindings": {
-        "values": {
-            "os_type": "amd"
-        },
         "deploy_type": "single"
     },
     "roles": {
-        "values": {
-            "os_type": "amd"
-        },
         "deploy_type": "single"
     },
     "services": {
-        "values": {
-            "os_type": "amd"
-        },
         "deploy_type": "single"
     },
     "storage_load_balancer": {
