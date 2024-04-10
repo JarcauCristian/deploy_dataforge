@@ -27,7 +27,7 @@
     },
     "mage": {
         "deploy_type": "mage_1",
-        "wait_time": 10000
+        "wait_time": 30
     },
     "mlflow": {
         "values": {
@@ -36,7 +36,7 @@
             "minio_secret_key": "doopepassword"
         },
         "deploy_type": "single",
-        "wait_time": 10000
+        "wait_time": 30
     },
     "mage_api": {
         "values": {

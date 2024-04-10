@@ -20,7 +20,7 @@ if [ -z ${KUBE_CONFIG_DEFAULT_LOCATION+x} ]; then
     exit 1
 fi
 
-python3 run_load_balancer.py -n $namespace -o $os_type
+python3 $PWD/storage_load_balancer/run_load_balancer.py -n $namespace -o $os_type
 
 if [ $? -ne 0 ]; then
     echo "Load Balancer failed creating!"

@@ -18,7 +18,7 @@ if [ -z ${KUBE_CONFIG_DEFAULT_LOCATION+x} ]; then
 fi
 
 
-python3 run_mlflow.py -n $namespace -a $minio_access_key -e $minio_endpoint -s $minio_secret_key -l $local_address
+python3 $PWD/mlflow/run_mlflow.py -n $namespace -a $minio_access_key -e $minio_endpoint -s $minio_secret_key -l $local_address
 
 if [ $? -ne 0 ]; then
     echo "Mlflow deployment failed creating!"

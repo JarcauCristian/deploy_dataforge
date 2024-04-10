@@ -18,7 +18,7 @@ if [[ $neo4j_service != "active" ]]; then
     exit 1
 fi
 
-python3 create_base_database.py -a $address -u $username -p $password
+python3 $PWD/neo4j_api/create_base_database.py -a $address -u $username -p $password
 
 if [ $? -ne 0 ]; then
     echo "Neo4j API failed creating!"
@@ -36,7 +36,7 @@ if [ -z ${KUBE_CONFIG_DEFAULT_LOCATION+x} ]; then
     exit 1
 fi
 
-python3 run_neo4j_api.py -n $namespace -a $address -o $os_type -u $username -p $password
+python3 $PWD/neo4j_api/run_neo4j_api.py -n $namespace -a $address -o $os_type -u $username -p $password
 
 if [ $? -ne 0 ]; then
     echo "Neo4j API failed creating!"

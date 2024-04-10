@@ -19,7 +19,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-python3 update_values.py -u $1 -p $2
+python3 $PWD/minio/update_values.py -u $1 -p $2
 
 helm install minio-realease minio --values ./values.yaml -n $3
 

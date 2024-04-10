@@ -19,7 +19,7 @@ if [ -z ${KUBE_CONFIG_DEFAULT_LOCATION+x} ]; then
     exit 1
 fi
 
-python3 run_dataset_cronjob.py -n $namespace -a $address -o $os_type
+python3 $PWD/dataset_cronjob/run_dataset_cronjob.py -n $namespace -a $address -o $os_type
 
 if [ $? -ne 0 ]; then
     echo "Dataset cronjob failed creating!"

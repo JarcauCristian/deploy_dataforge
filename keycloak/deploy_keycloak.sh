@@ -13,7 +13,7 @@ if [ -z ${KUBE_CONFIG_DEFAULT_LOCATION+x} ]; then
 fi
 
 
-python run_keycloak.py -a $address -n $1
+python3 $PWD/keycloak/run_keycloak.py -a $address -n $1
 
 if [ $? -ne 0 ]; then
     echo "Could not create the deployment for keycloak."
@@ -22,9 +22,9 @@ fi
 sleep 30
 
 if [ "$2" = "" ]; then
-    python create.py
+    python3 $PWD/keycloack/create.py
 else
-    python create.py -a $host
+    python3 $PWD/keycloack/create.py -a $host
 fi
 
 if [ $? -ne 0 ]; then

@@ -48,8 +48,8 @@ def main():
     failed_deployments = []
     for path in Path.cwd().rglob("deploy_*.sh"):
         deployment = str(path).split("/")[-2]
-        print(path)
-        if config[deployment].get("wait_time") is not None:
+        print(f"Deploying {deployment}")
+        if config[deployment].get("wait_time") is None:
             result = deploy(path, **{"namespace": config["namespace"]} | config[deployment]["values"]) if config[deployment].get("values") is not None else deploy(path, **{"namespace": config["namespace"]})
         else:
             result = deploy(path, **{"namespace": config["namespace"]} | config[deployment]["values"]) if config[deployment].get("values") is not None else deploy(path, **{"namespace": config["namespace"]})

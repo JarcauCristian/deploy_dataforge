@@ -16,7 +16,7 @@ if [ -z ${KUBE_CONFIG_DEFAULT_LOCATION+x} ]; then
     exit 1
 fi
 
-python3 run_postgres.py -n $namespace -u $current_user -a $address
+python3 $PWD/postgres/run_postgres.py -n $namespace -u $current_user -a $address
 
 if [ $? -ne 0 ]; then
     echo "Postgres failed creating!"
@@ -25,7 +25,7 @@ fi
 
 sleep 30
 
-python3 create_tables.py -a $address
+python3 $PWD/postgres/create_tables.py -a $address
 
 if [ $? -ne 0 ]; then
     echo "Tables failed creating!"
