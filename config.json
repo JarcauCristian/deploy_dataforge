@@ -1,23 +1,22 @@
 {
     "namespace": "default",
-    "os_type": "amd",
     "dataset_cronjob": {
+        "values": {
+            "os_type": "amd"
+        },
         "deploy_type": "single"
     },
     "interface": {
+        "values": {
+            "os_type": "amd"
+        },
         "deploy_type": "single"
     },
     "keycloak": {
         "deploy_type": "single",
         "values": {
-            "ui_hostname": ""
+            "ui_hostname": null
         }
-    },
-    "mage": {
-        "deploy_type": "with"
-    },
-    "mage_api": {
-        "deploy_type": "with"
     },
     "minio": {
         "values": {
@@ -26,21 +25,33 @@
         },
         "deploy_type": "single"
     },
+    "mage": {
+        "deploy_type": "mage_1",
+        "wait_time": 10000
+    },
     "mlflow": {
         "values": {
             "minio_endpoint": "https://minio1.sedimark.work",
             "minio_access_key": "super",
             "minio_secret_key": "doopepassword"
         },
-        "deploy_type": "with"
+        "deploy_type": "single",
+        "wait_time": 10000
+    },
+    "mage_api": {
+        "values": {
+            "os_type": "amd"
+        },
+        "deploy_type": "single"
     },
     "mlflow_api": {
-        "deploy_type": "with"
+        "deploy_type": "single"
     },
     "neo4j_api": {
         "values": {
             "username": "admin",
-            "password": "password"
+            "password": "password",
+            "os_type": "amd"
         },
         "deploy_type": "single"
     },
@@ -48,12 +59,21 @@
         "deploy_type": "single"
     },
     "notebook_cronjob": {
+        "values": {
+            "os_type": "amd"
+        },
         "deploy_type": "single"
     },
     "notebook_deletition": {
+        "values": {
+            "os_type": "amd"
+        },
         "deploy_type": "single"
     },
     "notebook_manager": {
+        "values": {
+            "os_type": "amd"
+        },
         "deploy_type": "single"
     },
     "postgres": {
@@ -63,15 +83,27 @@
         "deploy_type": "single"
     },
     "role_bindings": {
+        "values": {
+            "os_type": "amd"
+        },
         "deploy_type": "single"
     },
     "roles": {
+        "values": {
+            "os_type": "amd"
+        },
         "deploy_type": "single"
     },
     "services": {
+        "values": {
+            "os_type": "amd"
+        },
         "deploy_type": "single"
     },
     "storage_load_balancer": {
+        "values": {
+            "os_type": "amd"
+        },
         "deploy_type": "single"
     }
 }
